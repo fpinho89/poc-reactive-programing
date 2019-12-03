@@ -17,7 +17,7 @@ class InventoryClient {
         val client = WebClient.create(this.apiInventory)
 
         return client.get()
-                .uri("/inventory/product/{productId}", productId)
+                .uri("/inventory?productId={productId}", productId)
                 .retrieve()
                 .bodyToMono(Inventory::class.java)
 
