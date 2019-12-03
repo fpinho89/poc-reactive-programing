@@ -3,8 +3,8 @@ package br.com.poc.client
 import org.springframework.stereotype.Component
 
 @Component
-class Agregator(private val productClient: ProductClient,
-                private val inventoryClient: InventoryClient) {
+class Aggregator(private val productClient: ProductClient,
+                 private val inventoryClient: InventoryClient) {
 
     fun exec() {
         productClient.getProducts().flatMap {

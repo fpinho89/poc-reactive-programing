@@ -1,6 +1,6 @@
 package br.com.poc
 
-import br.com.poc.client.Agregator
+import br.com.poc.client.Aggregator
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean
 class PocClientApplication {
 
 	@Bean
-	fun init(aggregator: Agregator) = CommandLineRunner{
+	fun init(aggregator: Aggregator) = CommandLineRunner{
 		aggregator.exec()
 	}
 
