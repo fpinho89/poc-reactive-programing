@@ -1,2 +1,6 @@
 server:
   port: 8082
+
+api:
+  inventory: http://localhost:8081
+  product: http://localhost:8080
