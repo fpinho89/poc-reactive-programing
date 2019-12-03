@@ -1,25 +1,20 @@
-package br.com.poc.client
+package br.com.poc.repository
 
-import org.springframework.beans.factory.annotation.Value
+import br.com.poc.domain.Product
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Flux
 
 @Component
-class ProductClient {
-
-    @Value("\${api.product}")
-    lateinit var apiProduct: String
+class ProductRepository(private val productWebClient: WebClient) {
 
     fun getProducts(): Flux<Product> {
 
-        val client = WebClient.create(this.apiProduct)
-
-        return client.get()
+        return this.productWebClient.get()
                 .uri("/product")
                 .retrieve()
                 .bodyToFlux(Product::class.java)
 
     }
-
 }
+

@@ -1,22 +1,17 @@
-package br.com.poc.client
+package br.com.poc.repository
 
-import org.springframework.beans.factory.annotation.Value
+import br.com.poc.domain.Inventory
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Component
-class InventoryClient {
-
-    @Value("\${api.inventory}")
-    lateinit var apiInventory: String
+class InventoryRepository(private val inventoryWebClient: WebClient) {
 
     fun getInventoryByProductId(productId:Long): Mono<Inventory> {
 
-        val client = WebClient.create(this.apiInventory)
-
-        return client.get()
+        return this.inventoryWebClient.get()
                 .uri("/inventory?productId={productId}", productId)
                 .retrieve()
                 .bodyToMono(Inventory::class.java)
@@ -25,9 +20,7 @@ class InventoryClient {
 
     fun getAllInventory(): Flux<Inventory> {
 
-        val client = WebClient.create(this.apiInventory)
-
-        return client.get()
+        return this.inventoryWebClient.get()
                 .uri("/inventory")
                 .retrieve()
                 .bodyToFlux(Inventory::class.java)

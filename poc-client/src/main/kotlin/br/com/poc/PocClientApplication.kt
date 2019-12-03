@@ -13,8 +13,6 @@ class PocClientApplication {
 	fun init(aggregator: Aggregator) = CommandLineRunner{
 		aggregator.exec()
 	}
-
-
 }
 
 fun main(args: Array<String>) {
