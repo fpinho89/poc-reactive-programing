@@ -3,6 +3,7 @@ package br.com.poc.product.controller
 import br.com.poc.product.domain.Product
 import br.com.poc.product.exceptions.ProductNotFoundException
 import br.com.poc.product.service.ProductService
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
@@ -27,6 +28,7 @@ class ProductController(private val productService: ProductService) {
     @GetMapping("/product", produces = ["application/stream+json"])
     @ResponseStatus(HttpStatus.OK)
     fun getAll(): Flux<Product> {
+        LOGGER.info("Loading all products...")
         return this.productService.findAll()
                 .delayElements(Duration.ofMillis(300))
     }
@@ -51,4 +53,8 @@ class ProductController(private val productService: ProductService) {
                     )//.filter(isNotZero)//.filter{it.amount > 20}
                 }
     }*/
+
+    companion object {
+        val LOGGER = LoggerFactory.getLogger(ProductController::class.java)
+    }
 }

@@ -1,0 +1,11 @@
+server:
+  port: 9090
+
+spring:
+  cloud:
+    gateway:
+        routes:
+          - id: aggr-product
+            uri: http://localhost:8080/
+            predicates:
+              - Path=/product/**
